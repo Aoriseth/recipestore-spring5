@@ -57,4 +57,6 @@ public class Ingredient {
     public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
     }
+
+
 }
