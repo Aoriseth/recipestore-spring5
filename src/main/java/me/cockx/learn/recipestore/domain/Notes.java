@@ -1,12 +1,8 @@
 package me.cockx.learn.recipestore.domain;
-
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
 public class Notes {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
