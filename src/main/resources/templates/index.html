@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <title>Index Page</title>
 </head>
-<body>
+<body style="text-align: center">
 <h1 th:text="'Index Page'">Index Page</h1>
+<table style="text-align: left">
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Directions</th>
+    </tr>
+    <tr th:each="recipe:${recipes}">
+        <td th:text="${recipe.getId()}">1</td>
+        <td th:text="${recipe.getDescription()}">Tasty stuff</td>
+        <td th:text="${recipe.getDirections()}">First step...</td>
+    </tr>
+
+</table>
+
+
+
 </body>
 </html>

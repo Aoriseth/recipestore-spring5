@@ -1,40 +1,23 @@
 package me.cockx.learn.recipestore.controllers;
 
-import me.cockx.learn.recipestore.domain.Category;
-import me.cockx.learn.recipestore.domain.UnitOfMeasure;
-import me.cockx.learn.recipestore.repositories.CategoryRepository;
-import me.cockx.learn.recipestore.repositories.UnitOfMeasureRepository;
+import me.cockx.learn.recipestore.services.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Optional;
 
 @Controller
 public class MainController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository uomRepository;
+    private final RecipeService recipeService;
 
-    public MainController(CategoryRepository categoryRepository, UnitOfMeasureRepository uomRepository) {
-        this.categoryRepository = categoryRepository;
-        this.uomRepository = uomRepository;
+    public MainController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
-
-
-
     @GetMapping({"/","","index","index.html"})
-    public String index(){
+    public String index(Model model){
 
-        Optional<Category> cat = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> uom = uomRepository.findByUom("Pinch");
-
-        if(cat.isPresent()&&uom.isPresent()){
-            System.out.println("Category id is: " +cat.get().getId());
-            System.out.println("Uom id is: "+uom.get().getId());
-        }
-
-
+        model.addAttribute("recipes",recipeService.getRecipes());
         return "index";
     }
 }
