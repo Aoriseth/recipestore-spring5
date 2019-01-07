@@ -1,6 +1,6 @@
 package me.cockx.learn.recipestore.domain;
 
 
-enum Difficulty {
+public enum Difficulty {
     EASY, MODERATE, HARD
 }
