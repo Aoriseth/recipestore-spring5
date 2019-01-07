@@ -3,6 +3,7 @@ package me.cockx.learn.recipestore.domain;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -19,6 +20,9 @@ public class Recipe {
     private String url;
     private String directions;
 //    private Difficulty difficulty;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
