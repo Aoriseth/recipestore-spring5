@@ -1,5 +1,6 @@
 package me.cockx.learn.recipestore.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import me.cockx.learn.recipestore.domain.*;
 import me.cockx.learn.recipestore.repositories.CategoryRepository;
 import me.cockx.learn.recipestore.repositories.RecipeRepository;
@@ -7,6 +8,7 @@ import me.cockx.learn.recipestore.repositories.UnitOfMeasureRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class recipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
@@ -63,6 +66,8 @@ public class recipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure uDash = unitDash.get();
         UnitOfMeasure uPint = unitPint.get();
 
+        log.warn("Creating sample units of measure");
+
 
 
         Optional<Category> catAmerican = categoryRepository.findByDescription("American");
@@ -81,6 +86,8 @@ public class recipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Category cItalian = catItalian.get();
         Category cMexican = catMexican.get();
         Category cFastFood = catFastFood.get();
+
+        log.warn("Creating sample categories");
 
 
 //        Recipe for guacamole
@@ -182,10 +189,13 @@ public class recipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         recipes.add(tacosRecipe);
 
+        log.warn("Creating sample recipes");
+
         return recipes;
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
     }

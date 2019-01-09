@@ -1,6 +1,7 @@
 package me.cockx.learn.recipestore.domain;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
